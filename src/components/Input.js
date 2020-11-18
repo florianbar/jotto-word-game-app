@@ -2,10 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const Input = () => {
-    const success = useSelector(state => state.success);
+    const { success } = useSelector(state => state);
 
     return (
-        <div data-test="component-input">            
+        <div data-test="component-input">      
             {success ? null : (
                 <form className="form-inline">
                     <input 

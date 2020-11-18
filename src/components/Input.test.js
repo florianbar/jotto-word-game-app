@@ -1,14 +1,15 @@
 import React from 'react';
+import * as redux from 'react-redux'
 import { shallow } from 'enzyme';
 
 import { findByTestAttr, storeFactory } from '../../test/testUtils';
 import Input from './Input';
 
-const setup = (initialState = {}) => {
-    const store = storeFactory(initialState);
-    const wrapper = shallow(<Input store={store} />);
-    return wrapper;
+const setup = () => {
+    return shallow(<Input />);
 };
+
+const spy = jest.spyOn(redux, 'useSelector');
 
 describe("render", () => {
     describe("word has not been guessed", () => {
@@ -16,7 +17,8 @@ describe("render", () => {
 
         beforeEach(() => {
             const initialState = { success: false };
-            wrapper = setup(initialState);
+            spy.mockReturnValue(initialState);
+            wrapper = setup();
         });
 
         test("renders component without error", () => {
